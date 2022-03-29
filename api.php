@@ -1,4 +1,5 @@
 <?php
+
 header("Content-type: application/json; charset=utf-8;");
 
 $configs = include_once("config.php");
@@ -16,7 +17,7 @@ $conn = openConn($configs);
 $INPUT_PARAMS = populateInputParamsArray();
 $PARENT_NODE = populatePrentNodeDataArray($conn, $INPUT_PARAMS);
 
-//Retrieving all of the nodes that match with the user input parameters
+//Retrieving all the nodes that match with the user input parameters
 $matching_nodes = retrieveMatchingNodes($PARENT_NODE, $INPUT_PARAMS);
 
 
@@ -41,13 +42,6 @@ $nodes = applyPagination($nodes,$INPUT_PARAMS);
 
 //Returning the JSON response and replacing all UTF-8 chars
 echo Utf8_ansi(json_encode($nodes));
-
-
-
-
-
-
-
 
 
 
@@ -114,8 +108,6 @@ function countChildren($current_node) {
     return $fetched_result["children"];
 }
 
-
-
 //Opens the connection to the Database, accepts a 1 dimension config array as parameter.
 function openConn($configs) {
 
@@ -139,8 +131,6 @@ function returnError($error) {
     return '{"error":"' . $error . '"}';
 }
 
-
-
 //Checks the validity of the required input params retrieved from a GET HTTP request
 function checkForValidParams() {
 
@@ -160,8 +150,6 @@ function checkForValidParams() {
             exit(returnError("Invalid page size requested"));
     }
 }
-
-
 
 //Populate the input parameters array and performs additional checks on the data before assigning them
 function populateInputParamsArray() {
@@ -196,8 +184,6 @@ function populateInputParamsArray() {
 
 }
 
-
-
 //Populate the Parent Node array, returns an "Invalid node id" error if the query returns empty result
 function populatePrentNodeDataArray($conn,$INPUT_PARAMS) {
 
@@ -217,8 +203,6 @@ function populatePrentNodeDataArray($conn,$INPUT_PARAMS) {
         exit(returnError("Invalid node id"));
     }
 }
-
-
 
 //Converts char from utf-8 encoding to ansi
 function Utf8_ansi($valor = '') {
